@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    h1{text-align: center;color: rgb(4, 3, 66);}
+    h2 {text-align: center;color: rgb(66, 3, 3);}
+    table {text-align: center;}
+    th, td {
+      padding: 10px;
+    }
+    a:link{
+      background-color: rgb(230, 234, 236);
+      color: rgb(0, 0, 0);
+      border: 2px solid rgb(29, 2, 29);
+      padding: 5px 10px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+    }
+    p {
+      font-size: 1rem;
+      text-align: center;
+    }
+  body{ background: #4acbeb;}
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <title> Books Stock Details </title>
+  </head>
+    
+
+<body>
+<h1> Library Management System</h1><hr>
+<h2> Book Stock Details</h2><hr>
+<!-- 
+{% for i in all_books %}
+{{ forloop.counter }} --{{i.name}} ---{{i.qnty}}--{{i.price}}<br>
+{% endfor %}
+-->
+
+<table style="width:50%" border="2" align="center">
+    <tr>
+      <th style="background-color:#fbff00">Book ID</th>
+      <th style="background-color:#1eff00" style="background-color:#fbff00">Name</th>
+      <th style="background-color:#fbff00">Book Quantity</th>
+      <th style="background-color:#00ff37">Book Price</th>
+      <th style="background-color:#fbff00">Is_Published(Yes/No)</th>
+      <th style="background-color:#15ff00">Book Published_date</th>
+      <th colspan="4" style="background-color:#fbff00">Update/Delete</th>
+    </tr>
+   
+      {% for i in all_books %}
+      <tr>
+        <td>{{i.id}}</td>
+        <td>{{i.name}}</td>
+        <td>{{i.qnty}}</td>
+        <td>Rs.{{i.price}}</td>
+        {% if i.is_published %}
+        <td>Yes</td>
+        {% else %}
+        <td>No</td>
+        {% endif %}
+        <td>{{i.published_date}}</td>
+        {% if book_status == "In_Active" %}
+        <td><a href="{% url 'delete_book' i.id %}">Hard Delete</a></td>
+        <td><a href="{% url 'rrr_books' i.id %}">Restore</a></td>
+        {% else %} 
+        <td><a href="{% url 'update_book' i.id %}">Update</a></td> 
+        <td><a href="{% url 'soft_delete' i.id %}">Soft Delete</a></td> 
+        {% endif %}
+        
+      </tr>
+      {% endfor %} 
+</table>
+    <!-- <a href="/homepage/" style="display:block; text-align:center; background-color:#d1e5ec">Home Page</a>   -->
+    <p><a href="/homepage/">Home Page</a> <a href="{% url 'active_books' %}">Active Books</a> <a href="{% url 'in_active_books' %}">InActive Books</a></p> 
+  </body>
+</html>
